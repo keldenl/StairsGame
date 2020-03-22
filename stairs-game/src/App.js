@@ -19,8 +19,11 @@ class App extends Component {
   }
 
   onDown = event => {
-    this.props.moveUser(event.key);
-    console.log("MOUSEDOWN")
+    if (event.key === ' ') {
+      this.props.startGame();
+    } else if (this.props.gameState.started) {
+      this.props.moveUser(event.key);
+    }
   }
 
   render() {
@@ -31,6 +34,7 @@ class App extends Component {
         stairIdx={this.props.stairIdx}
         stairList={this.props.stairList}
         gameState={this.props.gameState}
+        startTime={this.props.startTime}
       />
     );
   }

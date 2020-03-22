@@ -19,7 +19,8 @@ const initialState = {
     prevPosition: 0,
     stairIdx: 0,
     stairList: stairList,
-    gameState: initialGameState
+    gameState: initialGameState,
+    startTime: new Date().getTime()
 };
   
 function reducer(state = initialState, action) {

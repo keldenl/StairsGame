@@ -1,5 +1,3 @@
-import { getNewStair } from "../utils/constants";
-
 function moveUser(state, action) {
     const validKeys = ['ArrowLeft', 'ArrowRight', 'ArrowDown'];
     if (!validKeys.includes(action.keyPressed)) return state;
@@ -12,7 +10,7 @@ function moveUser(state, action) {
     }
 
     if (position !== state.stairList[state.stairIdx+1]) { 
-        var gameState = Object.assign({}, state.gameState);
+        let gameState = Object.assign({}, state.gameState);
         gameState.lives -= 1;
         return {
             ...state,
@@ -21,6 +19,23 @@ function moveUser(state, action) {
     }
 
     let stairIdx = state.stairIdx+1;
+
+    console.log(stairIdx);
+
+    // Check for win
+    if (stairIdx === state.stairList.length-1) {
+        console.log("WINNER!");
+        let gameState = Object.assign({}, state.gameState);
+        gameState.started = false;
+        return {
+            ...state,
+            prevPosition,
+            position,
+            stairIdx,
+            gameState
+        };
+    }
+
     return {
         ...state,
         prevPosition,
