@@ -20,7 +20,6 @@ const initialState = {
     stairIdx: 0,
     stairList: stairList,
     gameState: initialGameState,
-    startTime: new Date().getTime()
 };
   
 function reducer(state = initialState, action) {

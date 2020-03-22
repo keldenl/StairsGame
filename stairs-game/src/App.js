@@ -34,7 +34,6 @@ class App extends Component {
         stairIdx={this.props.stairIdx}
         stairList={this.props.stairList}
         gameState={this.props.gameState}
-        startTime={this.props.startTime}
       />
     );
   }

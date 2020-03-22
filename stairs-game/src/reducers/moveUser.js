@@ -20,11 +20,8 @@ function moveUser(state, action) {
 
     let stairIdx = state.stairIdx+1;
 
-    console.log(stairIdx);
-
     // Check for win
     if (stairIdx === state.stairList.length-1) {
-        console.log("WINNER!");
         let gameState = Object.assign({}, state.gameState);
         gameState.started = false;
         return {

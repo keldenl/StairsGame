@@ -25,13 +25,17 @@ class Canvas extends Component {
         this.animateRef = React.createRef();
         this.stairsRef = React.createRef();
 
+        this.startTime = new Date().getTime();;
         this.timer = null;
 
         window.addEventListener("keyup", this.animate);
     }
 
     animate = () => {
-        if (this.state.currIdx !== this.props.stairIdx) {
+        if (this.props.stairIdx === 0) { 
+            this.startTime= new Date().getTime(); 
+        }
+        else if (this.state.currIdx !== this.props.stairIdx) {
             this.animateRef.current.childNodes[0].beginElement();
             this.stairsRef.current.childNodes[0].beginElement();
             this.setState({ currIdx: this.props.stairIdx });
@@ -40,7 +44,7 @@ class Canvas extends Component {
 
     componentDidMount() {
         // timer
-        this.timer = setInterval(()=> this.setState({time: (new Date().getTime() - this.props.startTime) / 1000}), 50);
+        this.timer = setInterval(()=> this.setState({time: (new Date().getTime() - this.startTime) / 1000}), 50);
     }
 
     render () {       
@@ -64,7 +68,7 @@ class Canvas extends Component {
                         />
                 </Fragment>
         } else if (this.props.stairIdx === 0) {
-            textDisplay = (<CurrentScore title="START GAME" x={-100} y={0}/>)
+            textDisplay = (<CurrentScore title="PRESS SPACE TO START GAME" x={hori.left + 50} y={0}/>)
         } else {
             window.clearTimeout(this.timer);
             textDisplay = (<CurrentScore title="END SCORE" score={this.state.time} x={-100} y={0}/>)

@@ -9,8 +9,6 @@ const mapStateToProps = state => ({
   prevPosition: state.prevPosition,
   stairList: state.stairList,
   stairIdx: state.stairIdx,
-  lives: state.lives,
-  startTime: state.startTime
 });
 
 const mapDispatchToProps = dispatch => ({
