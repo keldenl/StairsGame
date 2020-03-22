@@ -11,18 +11,21 @@ function moveUser(state, action) {
         default: break;
     }
 
-    console.log(state.stairList);
+    if (position !== state.stairList[state.stairIdx+1]) { 
+        var gameState = Object.assign({}, state.gameState);
+        gameState.lives -= 1;
+        return {
+            ...state,
+            gameState
+        } 
+    }
 
-    if (position !== state.stairList[1]) { return state; }
-    let stairList = state.stairList;
-    stairList.shift();
-    stairList.push(getNewStair(stairList[stairList.length-1]));
-    console.log("UPDATE STAIRLIST")
+    let stairIdx = state.stairIdx+1;
     return {
         ...state,
         prevPosition,
         position,
-        stairList
+        stairIdx
     };
 }
 

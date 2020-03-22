@@ -9,6 +9,15 @@ class App extends Component {
     window.addEventListener("keyup", this.onDown);
   }
 
+  componentDidMount() {
+    window.onresize = () => {
+      const cnv = document.getElementById('game-canvas');
+      cnv.style.width = `${window.innerWidth}px`;
+      cnv.style.height = `${window.innerHeight}px`;
+    };
+    window.onresize();
+  }
+
   onDown = event => {
     this.props.moveUser(event.key);
     console.log("MOUSEDOWN")
@@ -16,7 +25,13 @@ class App extends Component {
 
   render() {
     return (
-      <Canvas position={this.props.position} prevPosition={this.props.prevPosition} stairList={this.props.stairList}/>
+      <Canvas 
+        position={this.props.position} 
+        prevPosition={this.props.prevPosition} 
+        stairIdx={this.props.stairIdx}
+        stairList={this.props.stairList}
+        gameState={this.props.gameState}
+      />
     );
   }
 }
@@ -26,23 +41,3 @@ App.propTypes = {
 };
 
 export default App;
-
-// componentDidMount() {
-//   const self = this;
-//   setInterval(() => {
-//       self.props.moveObjects(self.canvasMousePosition);
-//   }, 10);
-// }
-
-// trackMouse(event) {
-//   this.canvasMousePosition = getCanvasPosition(event);
-// }
-
-// render() {
-//   return (
-//     <Canvas
-//       angle={this.props.angle}
-//       trackMouse={event => (this.trackMouse(event))}
-//     />
-//   );
-// }
